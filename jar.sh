@@ -1,1 +1,0 @@
-jar cmf META-INF/MANIFEST.MF BAA.jar *.class *.png visualrobot/*.class basicCommand/*.class
