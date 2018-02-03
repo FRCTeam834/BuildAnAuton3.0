@@ -75,6 +75,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 	
 	static JScrollPane scrollPane = new JScrollPane();
 	static GuidedDraw drawWindow = new GuidedDraw();
+	static SpeedModifier speedWindow = new SpeedModifier();
 	public static HashMap<Integer, Boolean> keys = new HashMap<>();
 	private boolean controlPressed = false;
 	
@@ -176,7 +177,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 				DeleteFunction.deleteDraw();
 			}
 			if(tool == SelectedTool.SPEED && mainPanel.getMousePosition() != null){
-				SpeedModifier.speedDraw();
+			//	SpeedModifier.speedDraw();
 			}
 			if(tool == SelectedTool.TURNSPEED && mainPanel.getMousePosition() != null){
 				TurnSpeedModifier.turnSpeedDraw();
@@ -399,6 +400,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 			}
 			speed.setEnabled(false);
 			drawWindow.setVisible(false);
+			speedWindow.setVisible(true);
 			tool = SelectedTool.SPEED;
 			Thread t = new Thread(() ->{
 				while(tool == SelectedTool.SPEED) {
@@ -605,7 +607,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 			DeleteFunction.deleteTool();
 		}
 		else if(tool == SelectedTool.SPEED){
-			SpeedModifier.speedTool();
+		//	SpeedModifier.speedTool();
 		}
 		else if(tool == SelectedTool.TURNSPEED){
 			TurnSpeedModifier.turnSpeedTool();
