@@ -222,14 +222,14 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 		addKeyListener(this);
 		//Sets the image that the field variable refers to
 		try {
-			URL ImageURL = BuildAnAuton.class.getResource("field2018.png");
+			URL ImageURL = BuildAnAuton.class.getResource("/resources/field2018.png");
 			if(ImageURL != null) {
 					field = ImageIO.read(ImageURL);
 				
 
 			}
 			else{
-				field = ImageIO.read(new File("field2018.png"));
+				field = ImageIO.read(new File("/resources/field2018.png"));
 
 			}
 
