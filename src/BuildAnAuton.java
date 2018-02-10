@@ -90,9 +90,6 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 	static double defaultSpeed = 0.5;
 	static double defaultTurnSpeed = 0.5;
 	
-	public static int mousePositionX;
-	public static int mousePositionY;
-	
 	//inchPerPixel is 708/807 (Inches on the field/Pixels in the image)
 	public final static double inchPerPixel = 708d/807d;
 	public static double minDistance = 10; //The minimum distance where the point becomes highlighted (EDIT, SELECT, DELETE, TURNSPEED)
