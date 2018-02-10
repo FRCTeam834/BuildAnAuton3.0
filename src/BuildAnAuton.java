@@ -688,6 +688,11 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
  		 		//Control e check
  		 		if (key == KeyEvent.VK_E && controlPressed)
  		 			export.doClick();
+ 		 		
+ 		 		if(key == KeyEvent.VK_ESCAPE){
+ 		 			tool = SelectedTool.NONE;
+ 		 			mainPanel.repaint();
+ 		 		}
  		 	}
  		 
  		 	@Override
