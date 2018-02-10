@@ -1,3 +1,4 @@
+
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -58,21 +59,7 @@ public class AddFunction{
 	public static double addDistance = 0;
 	public static void addDraw(){
 		BuildAnAuton.g2.setColor(Color.BLACK);
-			BuildAnAuton.g2.drawLine((int) BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).x, (int) BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).y, BuildAnAuton.mainPanel.getMousePosition().x, BuildAnAuton.mainPanel.getMousePosition().y);
-			addAngle = Math.atan2(BuildAnAuton.mainPanel.getMousePosition().y - BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).y, BuildAnAuton.mainPanel.getMousePosition().x - BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).x) * 180.0/Math.PI;
-			addDistance = new Point((int) BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).x, (int) BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).y).distance(new Point(BuildAnAuton.mainPanel.getMousePosition().x, BuildAnAuton.mainPanel.getMousePosition().y));// * inchPerPixel;
-		if(addAngle < 0) addAngle += 360;
-		addAngle = addAngle == 0 ? 0 :360-addAngle;
-		addAngle = Math.round(addAngle * 100.0) / 100.0; 
-		addDistance = Math.round(addDistance * 100.0) / 100.0;
-		//Tells you the information for your line
-		BuildAnAuton.g2.drawString("Angle: " + addAngle + " degrees", 50, 65); //These two lines draw the strings in the lower left hand corner of the screen.
-		BuildAnAuton.g2.drawString("Distance: " + addDistance + " in", 50, 50);
-	}
-	/*
-	 * This does not currently work
-	 */
-	public static void addDraw2(){
+		if(BuildAnAuton.shiftPressed){
 			//Calculates the Angle
 			double angle = Math.atan2(BuildAnAuton.mainPanel.getMousePosition().y-BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).y, BuildAnAuton.mainPanel.getMousePosition().x-BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).x)*180.0/Math.PI; //Actual angle between mouse and last point
 			
@@ -82,20 +69,34 @@ public class AddFunction{
 			//Horizontal Lines
 			if(addAngle == 180 || addAngle == 0) {
 				BuildAnAuton.g2.drawLine(BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).x, BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).y, BuildAnAuton.mainPanel.getMousePosition().x, BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).y);
-				addDistance = Math.abs(BuildAnAuton.mainPanel.getMousePosition().x - BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).x) * (708/807);
+				addDistance = Math.abs(BuildAnAuton.mainPanel.getMousePosition().x - BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).x) * BuildAnAuton.inchPerPixel;
 			}
 			//Vertical Lines
 			else if (addAngle == 90 || addAngle == 270) {
 				BuildAnAuton.g2.drawLine(BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).x, BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).y, BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).x, BuildAnAuton.mainPanel.getMousePosition().y);
-				addDistance = Math.abs(BuildAnAuton.mainPanel.getMousePosition().y-BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).y) * (708/807);
+				addDistance = Math.abs(BuildAnAuton.mainPanel.getMousePosition().y-BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).y) * BuildAnAuton.inchPerPixel;
 			}
 			//45 degree Lines
 			else {
 				double magnitude = Math.sqrt(Math.pow(BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).x - BuildAnAuton.mainPanel.getMousePosition().x, 2) + Math.pow(BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).y - BuildAnAuton.mainPanel.getMousePosition().y, 2));
-				addDistance = magnitude * (708/807);
+				addDistance = magnitude * BuildAnAuton.inchPerPixel;
 				double angleRadians = addAngle * Math.PI/180.0;
 				BuildAnAuton.g2.drawLine(BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).x, BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).y, (int) (BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).x + Math.cos(angleRadians) * magnitude), (int) (BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).y + Math.sin(angleRadians) * magnitude));	
 			}
+		}
+		else{
+			//Draws the Line, then calculates the angle and distance
+			BuildAnAuton.g2.drawLine((int) BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).x, (int) BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).y, BuildAnAuton.mainPanel.getMousePosition().x, BuildAnAuton.mainPanel.getMousePosition().y);
+			addAngle = Math.atan2(BuildAnAuton.mainPanel.getMousePosition().y - BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).y, BuildAnAuton.mainPanel.getMousePosition().x - BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).x) * 180.0/Math.PI;
+			addDistance = new Point((int) BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).x, (int) BuildAnAuton.pathPts.get(BuildAnAuton.indexGet).y).distance(new Point(BuildAnAuton.mainPanel.getMousePosition().x, BuildAnAuton.mainPanel.getMousePosition().y));// * inchPerPixel;
+		}
+		if(addAngle < 0) addAngle += 360;
+		addAngle = addAngle == 0 ? 0 :360-addAngle;
+		addAngle = Math.round(addAngle * 100.0) / 100.0; 
+		addDistance = Math.round(addDistance * 100.0) / 100.0;
+		//Tells you the information for your line
+		BuildAnAuton.g2.drawString("Angle: " + addAngle + " degrees", 50, 65); //These two lines draw the strings in the lower left hand corner of the screen.
+		BuildAnAuton.g2.drawString("Distance: " + addDistance + " in", 50, 50);
 	}
 	public static void addTool(){
 		//Adds the points and sets the speed
@@ -103,6 +104,7 @@ public class AddFunction{
 		int mouseY = BuildAnAuton.mainPanel.getMousePosition().y;
 		BuildAnAuton.pathPts.add(new Point(mouseX, mouseY));
 		BuildAnAuton.speeds.add(BuildAnAuton.defaultSpeed);
+		System.out.println(BuildAnAuton.speeds);
 		BuildAnAuton.turnSpeeds.add(BuildAnAuton.defaultTurnSpeed);
 		if(BuildAnAuton.defaultSpeed >= 0){
 			BuildAnAuton.backwards.add(false);
