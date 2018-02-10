@@ -646,11 +646,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 	}
-	/*
-	 * Zoom would be implemented here if it were useful
-	 * :(
-	 * Will
-	 */
+	
 /**
  * This code was written by Ryan Davis.
  * This implements keybinds for the toobar and menu
