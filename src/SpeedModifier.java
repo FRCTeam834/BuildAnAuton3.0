@@ -3,6 +3,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -37,6 +38,7 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -53,40 +55,28 @@ import visualrobot.CommandSet;
 
 import java.net.URL;
 
-public class SpeedModifier {//Theoretically highlights the line
-	public static int lineIndex = -1;
-	public static void speedDraw(){
-		double ldist = Integer.MAX_VALUE; //This tells defines the path points
-	    for(int l = 0; l < BuildAnAuton.pathPts.size() - 1; l++){// This draws a new line if the endpoints have changed.
-	    	double d = Line2D.ptSegDist(BuildAnAuton.pathPts.get(l).x, BuildAnAuton.pathPts.get(l).y, BuildAnAuton.pathPts.get(l + 1).x, BuildAnAuton.pathPts.get(l + 1).y, BuildAnAuton.mainPanel.getMousePosition().x, BuildAnAuton.mainPanel.getMousePosition().y);
-	    	if(d < BuildAnAuton.minDistance)
-	    	{
-	    		BuildAnAuton.minDistance = d;
-	    		lineIndex = l;
-	    		BuildAnAuton.mainPanel.repaint();
-	    		BuildAnAuton.g2.setColor(Color.MAGENTA);
-	    		BuildAnAuton.g2.drawLine(BuildAnAuton.pathPts.get(l).x, BuildAnAuton.pathPts.get(l).y, BuildAnAuton.pathPts.get(l + 1).x, BuildAnAuton.pathPts.get(l + 1).y);
-	    		break;
-	    	}
-	    	else{
-	    		lineIndex = -1;
-	    		break;
-	    	}
-	    }
-	}
-	public static void speedTool(){//Assigns the speed
-		int tempIndex = lineIndex;
-		String input = JOptionPane.showInputDialog(null, "Speed (-0.5 to 0.5): ");
-		if(input == null || input == "") return;
-		double val = Double.parseDouble(input);
-		if(Math.abs(val) > 0.5) val = BuildAnAuton.defaultSpeed;
-		BuildAnAuton.speeds.set(tempIndex, val);
-		if(BuildAnAuton.defaultSpeed >= 0){
-			BuildAnAuton.backwards.set(tempIndex, false);
-		}
-		else if(BuildAnAuton.defaultSpeed < 0){
-			BuildAnAuton.backwards.set(tempIndex, true);
-		}
-	//	System.out.println(Double.toString(BuildAnAuton.speeds.get(tempIndex)));
+public class SpeedModifier extends JFrame{//Theoretically highlights the line
+	SpeedModifier(){
+		setVisible(false);
+		JTextField indexSetter = new JTextField(6);
+		JLabel indexLabel = new JLabel ("Line");
+		JTextField speedSetter = new JTextField(6);
+		JLabel speedLabel = new JLabel ("Speed (-0.5 to 0.5)");
+		JButton setSpeed = new JButton("Set Speed");
+		setSize(150,175);
+		setLayout(new FlowLayout());
+		add(indexLabel);
+		add(indexSetter);
+		add(speedLabel);
+		add(speedSetter);
+		add(setSpeed);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setSpeed.addActionListener((ActionEvent e) -> {
+			int indexSet = (int) Double.parseDouble(indexSetter.getText());
+			double speedSet = Double.parseDouble(speedSetter.getText());
+			BuildAnAuton.speeds.set(indexSet, speedSet);
+			indexSetter.setText("");
+			speedSetter.setText("");
+		});	
 	}
 }
