@@ -103,7 +103,6 @@ public class AddFunction{
 		int mouseY = BuildAnAuton.mainPanel.getMousePosition().y;
 		BuildAnAuton.pathPts.add(new Point(mouseX, mouseY));
 		BuildAnAuton.speeds.add(BuildAnAuton.defaultSpeed);
-		System.out.println(BuildAnAuton.speeds);
 		BuildAnAuton.turnSpeeds.add(BuildAnAuton.defaultTurnSpeed);
 		if(BuildAnAuton.defaultSpeed >= 0){
 			BuildAnAuton.backwards.add(false);
