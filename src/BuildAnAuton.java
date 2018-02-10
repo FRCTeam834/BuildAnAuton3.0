@@ -107,7 +107,8 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 		static JButton restart = new JButton("Restart");
 		static JButton speed = new JButton("Speed");
 		static JButton turnSpeed = new JButton("Turn Speed");
-	//	static JButton mirror = new JButton("Mirror");
+		static JButton mirrorX = new JButton("Mirror X");
+		static JButton mirrorY = new JButton("Mirror Y");
 		static JButton translate = new JButton("Translate");
 		//Array of tools, allows program to disable/enable all of the tools
 	static JButton[] tools = {add, autodraw, edit, select, delete, restart, speed, turnSpeed, translate};
@@ -259,7 +260,8 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 		toolbar.add(delete);
 		toolbar.add(speed);
 		toolbar.add(turnSpeed);
-//		toolbar.add(mirror);
+		toolbar.add(mirrorX);
+		toolbar.add(mirrorY);
 		toolbar.add(translate);
 		toolbar.add(restart);
 		
@@ -425,22 +427,19 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 			});
 			t.start();
 		});
-		/* Mirror is unimplemented currently
-		mirror.addActionListener((ActionEvent e) -> { //Mirror Tool
-			AffineTransform t1 = new AffineTransform();
 
-			int w = path.getBounds().x + path.getBounds().width/2;
-			t1.translate(-2*w, 0);
-			path.transform(t1);
-
-			AffineTransform t2 = new AffineTransform();
-
-			t2.scale(-1, 1);
-
-			path.transform(t2);
-			p.repaint();
+		mirrorX.addActionListener((ActionEvent e) -> { //Mirror Tool
+			for(int indexFlip = 0; indexFlip <= pathPts.size() - 1; indexFlip++){
+				pathPts.set(indexFlip, new Point(field.getWidth() - pathPts.get(indexFlip).x, pathPts.get(indexFlip).y));
+			}
 		});
-		*/
+		
+		mirrorY.addActionListener((ActionEvent e) -> {
+			for(int indexFlip = 0; indexFlip <= pathPts.size() - 1; indexFlip++){
+				pathPts.set(indexFlip, new Point(pathPts.get(indexFlip).x, field.getHeight() - pathPts.get(indexFlip).y));
+			}
+		});
+		
 		translate.addActionListener((ActionEvent e) -> { //Translate Tool
 			for(JButton b: tools) {
 				b.setEnabled(true);
