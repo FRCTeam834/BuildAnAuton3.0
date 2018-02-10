@@ -76,8 +76,9 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 	static JScrollPane scrollPane = new JScrollPane();
 	static GuidedDraw drawWindow = new GuidedDraw();
 	static SpeedModifier speedWindow = new SpeedModifier();
-	public static HashMap<Integer, Boolean> keys = new HashMap<>();
+	
 	private boolean controlPressed = false;
+	public static boolean shiftPressed = false;
 	
 	static CommandEditor cmdEditor;
 	static CommandSet[] commands = new CommandSet[100]; //100 is the maximum number of points you can have
@@ -153,16 +154,9 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 			//Draws for each function.
 			if(tool == SelectedTool.ADD && mainPanel.getMousePosition() != null){
 				//Snaps angles if shift is enabled
-				if(keys.equals(KeyEvent.VK_SHIFT)) {
-					if(indexGet >= 0){
-						AddFunction.addDraw2();
-					}
-				}
-				else{
 					if(indexGet >= 0){
 						AddFunction.addDraw();
 					}
-				}
 			}
 			if(tool == SelectedTool.AUTODRAW){
 			//	drawWindow.autoDraw(); This is not needed as the window is toggled on and off
@@ -227,6 +221,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 	};
 		static BufferedImage field; //The screen
 	public BuildAnAuton() {
+		addKeyListener(this);
 		//Sets the image that the field variable refers to
 		try {
 			URL ImageURL = BuildAnAuton.class.getResource("field2018.png");
@@ -686,6 +681,10 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
  		 			controlPressed = true; //Shows control key is currently pressed
  		 		}
  		 		
+ 		 		if(key == KeyEvent.VK_SHIFT){
+ 		 			shiftPressed = true;
+ 		 		}
+ 		 		
  		 		//Control s check
  		 		if (key == KeyEvent.VK_S && controlPressed)
  		 			save.doClick();
@@ -705,6 +704,9 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
  		 		
  		 		if (key == KeyEvent.VK_CONTROL || key == KeyEvent.VK_META) {
  		 			controlPressed = false; //Shows control key is released
+ 		 		}
+ 		 		if(key == KeyEvent.VK_SHIFT){
+ 		 			shiftPressed = false;
  		 		}
  		  	}
 }
