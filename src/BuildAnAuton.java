@@ -75,6 +75,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 	
 	static JScrollPane scrollPane = new JScrollPane();
 	static GuidedDraw drawWindow = new GuidedDraw();
+	static SpeedModifier speedWindow = new SpeedModifier();
 	public static HashMap<Integer, Boolean> keys = new HashMap<>();
 	private boolean controlPressed = false;
 	
@@ -105,7 +106,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 		static JButton restart = new JButton("Restart");
 		static JButton speed = new JButton("Speed");
 		static JButton turnSpeed = new JButton("Turn Speed");
-		static JButton mirror = new JButton("Mirror");
+	//	static JButton mirror = new JButton("Mirror");
 		static JButton translate = new JButton("Translate");
 		//Array of tools, allows program to disable/enable all of the tools
 	static JButton[] tools = {add, autodraw, edit, select, delete, restart, speed, turnSpeed, translate};
@@ -176,21 +177,18 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 				DeleteFunction.deleteDraw();
 			}
 			if(tool == SelectedTool.SPEED && mainPanel.getMousePosition() != null){
-				SpeedModifier.speedDraw();
+				//SpeedModifier.speeed.setVisible(true);
 			}
 			if(tool == SelectedTool.TURNSPEED && mainPanel.getMousePosition() != null){
 				TurnSpeedModifier.turnSpeedDraw();
 			}
 			//This section draws the lines
-			if(tool != SelectedTool.SPEED){
-				SpeedModifier.lineIndex = -1;
-			}
 			for(indexDraw = 1; indexDraw <= pathPts.size() - 1; indexDraw++){
-				if(indexDraw >=1 && pathPts.isEmpty() == false && speeds.get(indexDraw - 1) < 0 && indexDraw != SpeedModifier.lineIndex){//Changes the lines to red if the speed is backwards
+				if(indexDraw >=1 && pathPts.isEmpty() == false && speeds.get(indexDraw - 1) < 0){//Changes the lines to red if the speed is backwards
 					BuildAnAuton.g2.setColor(Color.RED);
 					BuildAnAuton.g2.drawLine(pathPts.get(indexDraw - 1).x, pathPts.get(indexDraw - 1).y, pathPts.get(indexDraw).x, pathPts.get(indexDraw).y);
 				}
-				else if(indexDraw >= 1 && pathPts.isEmpty() == false && speeds.get(indexDraw - 1) > 0 && indexDraw != SpeedModifier.lineIndex){
+				else if(indexDraw >= 1 && pathPts.isEmpty() == false && speeds.get(indexDraw - 1) > 0){
 					BuildAnAuton.g2.setColor(Color.BLACK);
 					BuildAnAuton.g2.drawLine(pathPts.get(indexDraw - 1).x, pathPts.get(indexDraw - 1).y, pathPts.get(indexDraw).x, pathPts.get(indexDraw).y);
 				}
@@ -266,7 +264,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 		toolbar.add(delete);
 		toolbar.add(speed);
 		toolbar.add(turnSpeed);
-		toolbar.add(mirror);
+//		toolbar.add(mirror);
 		toolbar.add(translate);
 		toolbar.add(restart);
 		
@@ -283,7 +281,6 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 		settings.add(snapToPoints);
 		menu.add(settings);
 			
-		speeds.add(defaultSpeed); 
 		turnSpeeds.add(defaultTurnSpeed);
 		
 		//This section defines what occurs when the tool buttons are selected
@@ -399,6 +396,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 			}
 			speed.setEnabled(false);
 			drawWindow.setVisible(false);
+			speedWindow.setVisible(true);
 			tool = SelectedTool.SPEED;
 			Thread t = new Thread(() ->{
 				while(tool == SelectedTool.SPEED) {
@@ -605,7 +603,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 			DeleteFunction.deleteTool();
 		}
 		else if(tool == SelectedTool.SPEED){
-			SpeedModifier.speedTool();
+			//SpeedModifier.speedTool();
 		}
 		else if(tool == SelectedTool.TURNSPEED){
 			TurnSpeedModifier.turnSpeedTool();
