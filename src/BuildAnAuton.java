@@ -243,7 +243,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 		if(pathPts.isEmpty()){
 			pathPts.add(new Point(field.getWidth()/2, field.getHeight()/2));
 		}
-		
+		keys.put(KeyEvent.VK_SHIFT, false);
 		scrollPane.setViewportView(mainPanel);
 		scrollPane.setPreferredSize(new Dimension(field.getWidth()+4, field.getHeight()+4));
 		mainPanel.setPreferredSize(new Dimension(field.getWidth(), field.getHeight()));
@@ -646,7 +646,8 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 	
 /**
  * This code was written by Ryan Davis.
- * This implements keybinds for the toobar and menu
+ * This implements keybinds for the toolbar and menu
+ * This doesn't work currently.
  */
 @Override
  public void keyTyped(KeyEvent e) {
