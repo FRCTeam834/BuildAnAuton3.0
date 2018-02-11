@@ -649,9 +649,9 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
  * This implements keybinds for the toolbar and menu
  * This doesn't work currently.
  */
-@Override
- public void keyTyped(KeyEvent e) {
- }
+	@Override
+ 	public void keyTyped(KeyEvent e) {
+ 	}
 		
  	@Override
  	public void keyPressed(KeyEvent e) {
