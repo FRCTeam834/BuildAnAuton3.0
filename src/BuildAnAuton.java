@@ -77,6 +77,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 	static GuidedDraw drawWindow = new GuidedDraw();
 	static SpeedModifier speedWindow = new SpeedModifier();
 	
+	HashMap<Integer, Boolean> keys = new HashMap<>();
 	private boolean controlPressed = false;
 	public static boolean shiftPressed = false;
 	

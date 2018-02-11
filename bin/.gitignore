@@ -19,5 +19,6 @@
 /SpeedModifier.class
 /TurnSpeedModifier.class
 /basicCommand/
-/visualrobot/
 /resources/
+/visualrobot/
+/ToggleListener.class
