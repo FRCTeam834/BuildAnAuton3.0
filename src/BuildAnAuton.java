@@ -656,7 +656,6 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 		
  	@Override
  	public void keyPressed(KeyEvent e) {
- 		System.out.println("hello");
  		int key = e.getKeyCode();
  		//Checks if button pressed is number (0x30 is hex decimal representation of keyboard key 0)
  		 		if (key >= 0x30 && key <= 0x39) {
