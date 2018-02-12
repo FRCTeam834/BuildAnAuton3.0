@@ -1,4 +1,4 @@
-# BuildAnAuton_2.0 (NOTE: INSTRUCTIONS HAVE CHANGED FOR 2017)
+# BuildAnAuton_3.0 (Instructions Have Not Changed)
 The necessary jars can be found in the downloads folder.
 
 Instructions for setup:
