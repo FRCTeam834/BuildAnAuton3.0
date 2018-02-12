@@ -221,6 +221,8 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 		static BufferedImage field; //The screen
 	public BuildAnAuton() {
 		addKeyListener(this);
+		KeyListener k = new ToggleListener(this, keys);
+		this.addKeyListener(k); 
 		//Sets the image that the field variable refers to
 		try {
 			URL ImageURL = BuildAnAuton.class.getResource("/resources/field2018.png");
@@ -637,7 +639,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 	}
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
+		this.requestFocus();
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
@@ -647,7 +649,6 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 /**
  * This code was written by Ryan Davis.
  * This implements keybinds for the toolbar and menu
- * This doesn't work currently.
  */
 	@Override
  	public void keyTyped(KeyEvent e) {
@@ -655,7 +656,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 		
  	@Override
  	public void keyPressed(KeyEvent e) {
- 		
+ 		System.out.println("hello");
  		int key = e.getKeyCode();
  		//Checks if button pressed is number (0x30 is hex decimal representation of keyboard key 0)
  		 		if (key >= 0x30 && key <= 0x39) {
@@ -677,6 +678,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
  		 		
  		 		if(key == KeyEvent.VK_SHIFT){
  		 			shiftPressed = true;
+ 		 			System.out.println("yeet");
  		 		}
  		 		
  		 		//Control s check
@@ -706,6 +708,6 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
  		 		}
  		 		if(key == KeyEvent.VK_SHIFT){
  		 			shiftPressed = false;
- 		 		}
- 		  	}
+		}
+	}
 }
