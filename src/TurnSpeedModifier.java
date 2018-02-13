@@ -62,7 +62,7 @@ public class TurnSpeedModifier {
 	}
 	public static void turnSpeedTool(){//Sets the Turnspeed
 		int tempIndex = BuildAnAuton.indexHover;
-		String input = JOptionPane.showInputDialog(null, "Turn Speed (-0.5 to 0.5): ", BuildAnAuton.turnSpeeds.get(BuildAnAuton.indexHover));
+		String input = JOptionPane.showInputDialog(null, "Turn Speed (0 to 1): ", BuildAnAuton.turnSpeeds.get(BuildAnAuton.indexHover));
 		if(input == null || input == "") return;
 		double val = Double.parseDouble(input);
 		if(val < 0) val = 0;
