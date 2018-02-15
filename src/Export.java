@@ -104,7 +104,7 @@ public class Export {
 				numInMain++;
 				
 				double distance = Math.sqrt(dX*dX+dY*dY) * inchPerPixel;
-				program.getMain().add(new MoveStraightCommand(distance, backwards.get(indexSend - 1) ? -speeds.get(indexSend) : speeds.get(indexSend)));				
+				program.getMain().add(new MoveStraightCommand(distance, backwards.get(indexSend - 1) ? speeds.get(indexSend) : speeds.get(indexSend)));				
 				numInMain++;
 
 				System.out.println(dAngle+ " degrees, " + ((backwards.get(indexSend - 1) ? -1:1)*  distance) + " inches.");
