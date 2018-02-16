@@ -37,6 +37,8 @@ import visualrobot.EditableCommand;
  *
  */
 public class CommandEditor extends JFrame implements ActionListener {
+	private static final long serialVersionUID = 0;
+
 	private ArrayList<CommandBlock> commands = new ArrayList<CommandBlock>();
 	
 	JComponent workArea = new JComponent() {

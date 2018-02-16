@@ -1,54 +1,11 @@
-import java.awt.BasicStroke;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dialog.ModalExclusionType;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.geom.Path2D;
-import java.awt.geom.PathIterator;
-import java.awt.geom.QuadCurve2D;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
-import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-
-import javax.imageio.ImageIO;
 import javax.swing.JButton;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.JToolBar;
-import javax.swing.filechooser.FileNameExtensionFilter;
+
 
 //import BuildAnAuton2.SelectedTool;
 //import visualrobot.CommandSet;
@@ -57,14 +14,17 @@ import java.lang.Math;
 
 //import visualrobot.CommandSet; This will be used to reference other classes
 
-import java.net.URL;
 
-public class GuidedDraw extends JFrame{
+public class GuidedDraw extends JFrame {
+	private static final long serialVersionUID = 0;
+	
 	public static JButton draw = new JButton("Add");
 	public static JTextField angle = new JTextField (6);
 	public static JTextField distance = new JTextField(6);
 	public double identiFire = 0;
-	GuidedDraw() {//Layout of Window
+	
+	//Layout of Window
+	public GuidedDraw() {
 		setLayout(new FlowLayout());
 		JLabel setDistance = new JLabel ("Distance");
 		JLabel setAngle = new JLabel ("Angle");
@@ -91,11 +51,12 @@ public class GuidedDraw extends JFrame{
 			BuildAnAuton.pathPts.add(new Point(finaldistx, finaldisty));
 			BuildAnAuton.speeds.add(BuildAnAuton.defaultSpeed);
 			BuildAnAuton.turnSpeeds.add(BuildAnAuton.defaultTurnSpeed);
-			if(BuildAnAuton.defaultSpeed >= 0){
-			BuildAnAuton.backwards.add(false);
+			
+			if (BuildAnAuton.defaultSpeed >= 0) {
+				BuildAnAuton.backwards.add(false);
 			}
-			else if(BuildAnAuton.defaultSpeed < 0){
-			BuildAnAuton.backwards.add(true);
+			else if (BuildAnAuton.defaultSpeed < 0) {
+				BuildAnAuton.backwards.add(true);
 			}
 		});
 	}

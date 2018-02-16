@@ -143,18 +143,20 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 	//Draw the main frame
 	public static JComponent mainPanel = new JComponent(){
 		public void paintComponent(Graphics g) { //Paint component allows for the program to draw where the robot should go, and also in general draws everything
-				g2 = (Graphics2D) g;
-					g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-					g2.setColor(Color.BLACK);
-					g2.setStroke(new BasicStroke(3));
+			g2 = (Graphics2D) g;
+			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			g2.setColor(Color.BLACK);
+			g2.setStroke(new BasicStroke(3));
 			g2.drawImage(field, 0, 0, null); //Draws image of field
+			
 			indexGet = pathPts.size() - 1; //This index is used to get the coordinates of the current point
+			
 			//Draws for each function.
 			if(tool == SelectedTool.ADD && mainPanel.getMousePosition() != null){
 				//Snaps angles if shift is enabled
-					if(indexGet >= 0){
-						AddFunction.addDraw();
-					}
+				if(indexGet >= 0){
+					AddFunction.addDraw();
+				}
 			}
 			if(tool == SelectedTool.AUTODRAW){
 			//	drawWindow.autoDraw(); This is not needed as the window is toggled on and off
@@ -229,7 +231,8 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 			}
 		};
 	};
-		static BufferedImage field; //The screen
+	static BufferedImage field; //The screen
+	
 	public BuildAnAuton() {
 		addKeyListener(this);
 		KeyListener k = new ToggleListener(this, keys);
@@ -238,20 +241,16 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 		try {
 			URL ImageURL = BuildAnAuton.class.getResource("/resources/field2018.png");
 			if(ImageURL != null) {
-					field = ImageIO.read(ImageURL);
-				
-
+				field = ImageIO.read(ImageURL);
 			}
 			else{
 				field = ImageIO.read(new File("/resources/field2018.png"));
-
 			}
-
-			}
-			catch (IOException e) {
-				e.printStackTrace();
-
-			}
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		//Creates the starting point
 		if(pathPts.isEmpty()){
 			pathPts.add(new Point(field.getWidth()/2, field.getHeight()/2));
@@ -631,11 +630,13 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 		frame.pack();
 		frame.setVisible(true);	
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-}
+	}
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 	}
+	
 	public void mouseReleased(MouseEvent e) {//These are tools that trigger when the mouse is released
 		if(tool == SelectedTool.EDIT && dragging){
 			EditFunction.editTool();
@@ -650,6 +651,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 			dragging = false;
 		}
 	}
+	
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		this.requestFocus();
@@ -659,10 +661,10 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 		// TODO Auto-generated method stub
 	}
 	
-/**
- * This code was written by Ryan Davis.
- * This implements keybinds for the toolbar and menu
- */
+	/**
+	 * This code was written by Ryan Davis.
+	 * This implements keybinds for the toolbar and menu
+	 */	
 	@Override
  	public void keyTyped(KeyEvent e) {
  	}
@@ -671,55 +673,56 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
  	public void keyPressed(KeyEvent e) {
  		int key = e.getKeyCode();
  		//Checks if button pressed is number (0x30 is hex decimal representation of keyboard key 0)
- 		 		if (key >= 0x30 && key <= 0x39) {
- 		 			try {
- 		 				
- 		 				//Checks if key pressed is 0
- 		 				if (key == KeyEvent.VK_0)
- 		 					key = 58;
- 		 				
- 		 				//Converts hex into keyboard key number value plus 1 and clicks toolbar button at the index
- 		 				((JButton) toolbar.getComponent(key-49)).doClick();
- 		 				
- 		 			} catch (ArrayIndexOutOfBoundsException ex) {}
- 		 		}
- 		 		
- 		 		if (key == KeyEvent.VK_CONTROL || key == KeyEvent.VK_META) {
- 		 			controlPressed = true; //Shows control key is currently pressed
- 		 		}
- 		 		
- 		 		if(key == KeyEvent.VK_SHIFT){
- 		 			shiftPressed = true;
- 		 			System.out.println("yeet");
- 		 		}
- 		 		
- 		 		//Control s check
- 		 		if (key == KeyEvent.VK_S && controlPressed)
- 		 			save.doClick();
- 		 		
- 		 		//Control o check
- 		 		if (key == KeyEvent.VK_O && controlPressed)
- 		 			load.doClick();
- 		 		
- 		 		//Control e check
- 		 		if (key == KeyEvent.VK_E && controlPressed)
- 		 			export.doClick();
- 		 		
- 		 		if(key == KeyEvent.VK_ESCAPE){
- 		 			tool = SelectedTool.NONE;
- 		 			mainPanel.repaint();
- 		 		}
- 		 	}
- 		 
- 		 	@Override
- 		 	public void keyReleased(KeyEvent e) {
- 		 		int key = e.getKeyCode();
- 		 		
- 		 		if (key == KeyEvent.VK_CONTROL || key == KeyEvent.VK_META) {
- 		 			controlPressed = false; //Shows control key is released
- 		 		}
- 		 		if(key == KeyEvent.VK_SHIFT){
- 		 			shiftPressed = false;
+ 		if (key >= 0x30 && key <= 0x39) {
+ 			try {
+ 				
+ 				//Checks if key pressed is 0
+ 				if (key == KeyEvent.VK_0)
+ 					key = 58;
+ 				
+ 				//Converts hex into keyboard key number value plus 1 and clicks toolbar button at the index
+ 				((JButton) toolbar.getComponent(key-49)).doClick();
+ 				
+ 			} catch (ArrayIndexOutOfBoundsException ex) {}
+ 		}
+ 		
+ 		if (key == KeyEvent.VK_CONTROL || key == KeyEvent.VK_META) {
+ 			controlPressed = true; //Shows control key is currently pressed
+ 		}
+ 		
+ 		if(key == KeyEvent.VK_SHIFT){
+ 			shiftPressed = true;
+ 			System.out.println("yeet");
+ 		}
+ 		
+ 		//Control s check
+ 		if (key == KeyEvent.VK_S && controlPressed)
+ 			save.doClick();
+ 		
+ 		//Control o check
+ 		if (key == KeyEvent.VK_O && controlPressed)
+ 			load.doClick();
+ 		
+ 		//Control e check
+ 		if (key == KeyEvent.VK_E && controlPressed)
+ 			export.doClick();
+ 		
+ 		if(key == KeyEvent.VK_ESCAPE){
+ 			tool = SelectedTool.NONE;
+ 			mainPanel.repaint();
+ 		}
+ 	}
+	 
+ 	@Override
+ 	public void keyReleased(KeyEvent e) {
+ 		int key = e.getKeyCode();
+ 		
+ 		if (key == KeyEvent.VK_CONTROL || key == KeyEvent.VK_META) {
+ 			controlPressed = false; //Shows control key is released
+ 		}
+ 		
+ 		if(key == KeyEvent.VK_SHIFT){
+ 			shiftPressed = false;
 		}
 	}
 }

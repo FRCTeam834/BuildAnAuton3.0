@@ -63,16 +63,16 @@ public class Export {
 		double currY = 0;
 		double currAngle = 0;
 		//This adds all of the commands for the point
-		if(commands!= null) {
+		if (commands!= null) {
 			program.getMain().addAll(commands[0].getMain());
-			for(int j = 1; j < commands[0].getSize(); j++ ){
+			for (int j = 1; j < commands[0].getSize(); j++ ){
 				program.addThread(0, commands[0].getCommands().get(j));
 			}
 		}
 		int indexSend = 0;		
 
 		//For loop that converts the rest of the points to commands
-		for(indexSend = 1; indexSend <= BuildAnAuton.pathPts.size(); indexSend++) {
+		for (indexSend = 1; indexSend <= BuildAnAuton.pathPts.size(); indexSend++) {
 			//switch(type) {
 			//case 1:
 				currX = path.get(indexSend).x;
@@ -85,17 +85,17 @@ public class Export {
 				currAngle = getCurrAngle(dX, dY, lastAngle);
 				
 				//Changes turn angle if the robot will be going backwards
-				if(backwards.get(indexSend - 1)) {
+				if (backwards.get(indexSend - 1)) {
 					currAngle +=180;
 				}
 				
 				double dAngle = currAngle - lastAngle;
 				//Makes angle between 1 and 360
-				while(Math.abs(dAngle) > 180 ) {
-					if(dAngle < 180) {
+				while (Math.abs(dAngle) > 180 ) {
+					if (dAngle < 180) {
 						dAngle += 360;
 					}
-					if(dAngle > 180) {
+					if (dAngle > 180) {
 						dAngle -= 360;
 					}
 				}
@@ -132,7 +132,7 @@ public class Export {
 			}
 			*/
 			//Adds the commands for the rest of the points
-			if(commands != null && commands[indexSend] != null) {
+			if (commands != null && commands[indexSend] != null) {
 				program.getMain().addAll(commands[indexSend].getMain());
 				for(int j = 1; j < commands[indexSend].getSize(); j++ ){
 					program.addThread(numInMain + commands[indexSend].getThreadStarts()[j], 
