@@ -75,6 +75,7 @@ public class GuidedDraw extends JFrame{
 		add(draw);
 		setSize(100,175);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		getRootPane().setDefaultButton(draw);
 		
 		draw.addActionListener((ActionEvent e1) -> {//Adds the point to the path
 			double setDistance1 = Double.parseDouble(distance.getText());
