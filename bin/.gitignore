@@ -17,8 +17,8 @@
 /PointCommands.class
 /QuadCurveEquation.class
 /SpeedModifier.class
+/ToggleListener.class
 /TurnSpeedModifier.class
 /basicCommand/
 /resources/
 /visualrobot/
-/ToggleListener.class

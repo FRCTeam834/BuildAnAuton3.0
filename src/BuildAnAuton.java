@@ -58,7 +58,6 @@ import java.net.URL;
  * This is modular, and you can add whatever functions you like
  * @author Will Corvino
  * @author Ryan Davis
- * For reference, see BuildAnAuton2.0
  */
 public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 	public static ArrayList<Point> pathPts = new ArrayList<Point>();
@@ -183,7 +182,12 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 				else if(indexDraw >= 1 && pathPts.isEmpty() == false && speeds.get(indexDraw - 1) > 0){
 					BuildAnAuton.g2.setColor(Color.BLACK);
 				}
-				BuildAnAuton.g2.drawLine(pathPts.get(indexDraw - 1).x, pathPts.get(indexDraw - 1).y, pathPts.get(indexDraw).x, pathPts.get(indexDraw).y);
+				Line2D x = new Line2D.Double(pathPts.get(indexDraw - 1).x, pathPts.get(indexDraw - 1).y, pathPts.get(indexDraw).x, pathPts.get(indexDraw).y);
+				
+				if (x.contains(mainPanel.getMousePosition())) {
+					BuildAnAuton.g2.setColor(Color.MAGENTA);
+				}
+				BuildAnAuton.g2.draw(x);
 			}
 			//Draws the points
 			for(indexDraw = 0; indexDraw <= pathPts.size() - 1; indexDraw++){
@@ -610,7 +614,9 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 			TurnSpeedModifier.turnSpeedTool();
 		}
 		else if(tool == SelectedTool.EDIT){
+			if (indexHover != -1) { 
 				dragging = true;
+			}
 		}
 		else if(tool == SelectedTool.TRANSLATE){
 			if(!dragging){
