@@ -71,6 +71,7 @@ public class SpeedModifier extends JFrame{//Theoretically highlights the line
 		add(speedSetter);
 		add(setSpeed);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		getRootPane().setDefaultButton(setSpeed);
 		setSpeed.addActionListener((ActionEvent e) -> {
 			int indexSet = (int) Double.parseDouble(indexSetter.getText());
 			double speedSet = Double.parseDouble(speedSetter.getText());
