@@ -216,6 +216,15 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 					}
 				}
 			}
+			//Determines whether you are moving backwards
+			for(int indexCheck = 0; indexCheck <= pathPts.size() - 2; indexCheck++){
+				if(speeds.get(indexCheck) < 0){
+					backwards.set(indexCheck, true);
+				}
+				else{
+					backwards.set(indexCheck, false);
+				}
+			}
 		};
 	};
 		static BufferedImage field; //The screen
