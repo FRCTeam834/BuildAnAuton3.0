@@ -179,23 +179,21 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 			for(indexDraw = 1; indexDraw <= pathPts.size() - 1; indexDraw++){
 				if(indexDraw >=1 && pathPts.isEmpty() == false && speeds.get(indexDraw - 1) < 0){//Changes the lines to red if the speed is backwards
 					BuildAnAuton.g2.setColor(Color.RED);
-					BuildAnAuton.g2.drawLine(pathPts.get(indexDraw - 1).x, pathPts.get(indexDraw - 1).y, pathPts.get(indexDraw).x, pathPts.get(indexDraw).y);
 				}
 				else if(indexDraw >= 1 && pathPts.isEmpty() == false && speeds.get(indexDraw - 1) > 0){
 					BuildAnAuton.g2.setColor(Color.BLACK);
-					BuildAnAuton.g2.drawLine(pathPts.get(indexDraw - 1).x, pathPts.get(indexDraw - 1).y, pathPts.get(indexDraw).x, pathPts.get(indexDraw).y);
 				}
+				BuildAnAuton.g2.drawLine(pathPts.get(indexDraw - 1).x, pathPts.get(indexDraw - 1).y, pathPts.get(indexDraw).x, pathPts.get(indexDraw).y);
 			}
 			//Draws the points
 			for(indexDraw = 0; indexDraw <= pathPts.size() - 1; indexDraw++){
 				if(indexDraw == 0){//Draws the starting point
 					BuildAnAuton.g2.setColor(Color.GREEN);
-					BuildAnAuton.g2.fill(new Ellipse2D.Double(pathPts.get(indexDraw).x - 5, pathPts.get(indexDraw).y - 5, 10, 10));
 				}
 				else if(indexDraw >= 1){
 					BuildAnAuton.g2.setColor(Color.BLUE);
-					BuildAnAuton.g2.fill(new Ellipse2D.Double(pathPts.get(indexDraw).x - 5, pathPts.get(indexDraw).y - 5, 10, 10));
 				}
+				BuildAnAuton.g2.fill(new Ellipse2D.Double(pathPts.get(indexDraw).x - 5, pathPts.get(indexDraw).y - 5, 10, 10));
 			}
 			//Determines what point you are hovering over
 			if(mainPanel.getMousePosition() != null && pathPts.isEmpty() == false && !dragging && tool != SelectedTool.AUTODRAW && tool != SelectedTool.TRANSLATE){
