@@ -72,7 +72,7 @@ public class Export {
 		int indexSend = 0;		
 
 		//For loop that converts the rest of the points to commands
-		for (indexSend = 1; indexSend <= BuildAnAuton.pathPts.size(); indexSend++) {
+		for (indexSend = 1; indexSend <= BuildAnAuton.pathPts.size() - 1; indexSend++) {
 			//switch(type) {
 			//case 1:
 				currX = path.get(indexSend).x;
@@ -83,7 +83,7 @@ public class Export {
 				double dY = currY-lastY;
 				
 				currAngle = getCurrAngle(dX, dY, lastAngle);
-				
+			
 				//Changes turn angle if the robot will be going backwards
 				if (backwards.get(indexSend - 1)) {
 					currAngle +=180;
@@ -104,7 +104,7 @@ public class Export {
 				numInMain++;
 				
 				double distance = Math.sqrt(dX*dX+dY*dY) * inchPerPixel;
-				program.getMain().add(new MoveStraightCommand(distance, backwards.get(indexSend - 1) ? speeds.get(indexSend) : speeds.get(indexSend)));				
+				program.getMain().add(new MoveStraightCommand(distance, backwards.get(indexSend - 1) ? -speeds.get(indexSend - 1) : speeds.get(indexSend - 1)));				
 				numInMain++;
 
 				System.out.println(dAngle+ " degrees, " + ((backwards.get(indexSend - 1) ? -1:1)*  distance) + " inches.");

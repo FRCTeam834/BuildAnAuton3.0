@@ -222,12 +222,17 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 			}
 			//Determines whether you are moving backwards
 			for(int indexCheck = 0; indexCheck <= pathPts.size() - 2; indexCheck++){
-				if(speeds.get(indexCheck) < 0){
+				if(speeds.get(indexCheck) < 0 && backwards != null)
 					backwards.set(indexCheck, true);
-				}
-				else{
+				
+				else if (speeds.get(indexCheck) > 0 && backwards != null)
 					backwards.set(indexCheck, false);
-				}
+				
+				else if (speeds.get(indexCheck) < 0 && backwards == null)
+					backwards.add(true);
+				
+				else if (speeds.get(indexCheck) > 0 && backwards == null)
+					backwards.add(false);
 			}
 		};
 	};
@@ -598,6 +603,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 				cmdEditor.dispose();
 			cmdEditor = new CommandEditor();
 			cmdEditor.setVisible(true);
+			cmdEditor.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			cmdEditor.load(commands[indexHover]);
 		}
 		else if(tool == SelectedTool.ADD){

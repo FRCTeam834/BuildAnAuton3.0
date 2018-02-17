@@ -96,7 +96,7 @@ public class CommandEditor extends JFrame implements ActionListener {
 	private int selected = -1;
 	
 	private CommandPanel cmdPanel = new CommandPanel();
-	private CommandSet cmdSet;
+	private CommandSet cmdSet = new CommandSet();
 	private JScrollPane fields;
 	
 	private int snapGap = 30;
@@ -445,6 +445,10 @@ public class CommandEditor extends JFrame implements ActionListener {
 	}
 	
 	public void load(CommandSet c) {
+		if (c == null) {
+			return;
+		}
+		
 		ArrayList<ArrayList<Command>> toLoad = c.getCommands();
 		
 		cmdSet = c;
@@ -510,7 +514,7 @@ public class CommandEditor extends JFrame implements ActionListener {
 				
 			toExport.add(program);
 		}
-		
+				
 		cmdSet.set(toExport, threadStarts);
 	
 			
