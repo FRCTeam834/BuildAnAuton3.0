@@ -222,16 +222,16 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 			}
 			//Determines whether you are moving backwards
 			for(int indexCheck = 0; indexCheck <= pathPts.size() - 2; indexCheck++){
-				if(speeds.get(indexCheck) < 0 && backwards != null)
+				if(speeds.get(indexCheck) < 0 && backwards.size() >= indexCheck + 1)
 					backwards.set(indexCheck, true);
 				
-				else if (speeds.get(indexCheck) > 0 && backwards != null)
+				else if (speeds.get(indexCheck) > 0 && backwards.size() >= indexCheck + 1)
 					backwards.set(indexCheck, false);
 				
-				else if (speeds.get(indexCheck) < 0 && backwards == null)
+				else if (speeds.get(indexCheck) < 0 && backwards.size() < indexCheck + 1)
 					backwards.add(true);
 				
-				else if (speeds.get(indexCheck) > 0 && backwards == null)
+				else if (speeds.get(indexCheck) > 0 && backwards.size() < indexCheck + 1)
 					backwards.add(false);
 			}
 		};
