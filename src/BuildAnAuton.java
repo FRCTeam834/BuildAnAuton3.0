@@ -39,7 +39,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
-
 import java.lang.Math;
 
 import visualrobot.CommandSet;
@@ -60,6 +59,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 	public static int indexGet = 0;
 	public static int indexDraw = 0;
 	public static int indexHover = -1;
+	public static int lineIndex = -1;
 	
 	public static boolean dragging = false;
 	Point refPoint = new Point(0,0);
@@ -163,12 +163,11 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 				DeleteFunction.deleteDraw();
 			}
 			if(tool == SelectedTool.SPEED && mainPanel.getMousePosition() != null){
-				//SpeedModifier.speeed.setVisible(true);
+				//SpeedModifier.speed.setVisible(true);
 			}
 			if(tool == SelectedTool.TURNSPEED && mainPanel.getMousePosition() != null){
 				TurnSpeedModifier.turnSpeedDraw();
 			}
-			
 			//This section draws the lines
 			for(indexDraw = 1; indexDraw <= pathPts.size() - 1; indexDraw++){
 				if(indexDraw >=1 && pathPts.isEmpty() == false && speeds.get(indexDraw - 1) < 0){//Changes the lines to red if the speed is backwards
@@ -188,7 +187,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 				
 					//Checks if mouseLocation "hits" (intersects) the line
 					if (g2.hit(mouseLocation, line, false)) {
-					
+						lineIndex = indexDraw - 1;
 						//Checks which tool is selected and colors accordingly
 						switch (tool) {
 						case EDIT:
@@ -421,7 +420,6 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 			}
 			speed.setEnabled(false);
 			drawWindow.setVisible(false);
-			speedWindow.setVisible(true);
 			tool = SelectedTool.SPEED;
 			Thread t = new Thread(() ->{
 				while(tool == SelectedTool.SPEED) {
@@ -626,7 +624,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 			DeleteFunction.deleteTool();
 		}
 		else if(tool == SelectedTool.SPEED){
-			//SpeedModifier.speedTool();
+			SpeedModifier.speedTool();
 		}
 		else if(tool == SelectedTool.TURNSPEED){
 			TurnSpeedModifier.turnSpeedTool();
