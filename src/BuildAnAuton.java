@@ -1,21 +1,17 @@
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dialog.ModalExclusionType;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.geom.Path2D;
-import java.awt.geom.PathIterator;
-import java.awt.geom.QuadCurve2D;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
@@ -28,11 +24,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
@@ -44,9 +38,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.JToolBar;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.lang.Math;
 
@@ -176,20 +168,41 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 			if(tool == SelectedTool.TURNSPEED && mainPanel.getMousePosition() != null){
 				TurnSpeedModifier.turnSpeedDraw();
 			}
+			
 			//This section draws the lines
 			for(indexDraw = 1; indexDraw <= pathPts.size() - 1; indexDraw++){
 				if(indexDraw >=1 && pathPts.isEmpty() == false && speeds.get(indexDraw - 1) < 0){//Changes the lines to red if the speed is backwards
-					BuildAnAuton.g2.setColor(Color.RED);
+					g2.setColor(Color.RED);
 				}
 				else if(indexDraw >= 1 && pathPts.isEmpty() == false && speeds.get(indexDraw - 1) > 0){
-					BuildAnAuton.g2.setColor(Color.BLACK);
+					g2.setColor(Color.BLACK);
 				}
-				Line2D x = new Line2D.Double(pathPts.get(indexDraw - 1).x, pathPts.get(indexDraw - 1).y, pathPts.get(indexDraw).x, pathPts.get(indexDraw).y);
+				Line2D line = new Line2D.Double(pathPts.get(indexDraw - 1).x, pathPts.get(indexDraw - 1).y, pathPts.get(indexDraw).x, pathPts.get(indexDraw).y);
+
+				//Checks if mouse is in scrollpane
+				if (!(getMousePosition()==null)) {
 				
-				if (x.contains(mainPanel.getMousePosition())) {
-					BuildAnAuton.g2.setColor(Color.MAGENTA);
+					//Adds rectangle to mouse for hit
+					Rectangle mouseLocation = new Rectangle(getMousePosition());
+					mouseLocation.setSize(5,5);
+				
+					//Checks if mouseLocation "hits" (intersects) the line
+					if (g2.hit(mouseLocation, line, false)) {
+					
+						//Checks which tool is selected and colors accordingly
+						switch (tool) {
+						case EDIT:
+							g2.setColor(Color.CYAN);
+							break;
+						case SPEED:
+							g2.setColor(Color.MAGENTA);
+							break;
+						default:
+							break;
+						}
+					}
 				}
-				BuildAnAuton.g2.draw(x);
+				g2.draw(line);
 			}
 			//Draws the points
 			for(indexDraw = 0; indexDraw <= pathPts.size() - 1; indexDraw++){
