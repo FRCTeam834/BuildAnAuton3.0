@@ -73,7 +73,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 	public static boolean shiftPressed = false;
 	
 	static CommandEditor cmdEditor;
-	static CommandSet[] commands = new CommandSet[100]; //100 is the maximum number of points you can have
+	static CommandSet[] commands = new CommandSet[1]; //100 is the maximum number of points you can have
 	
 	static double initialAngle;
 	
