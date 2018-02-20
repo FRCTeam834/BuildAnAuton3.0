@@ -73,7 +73,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 	public static boolean shiftPressed = false;
 	
 	static CommandEditor cmdEditor;
-	static CommandSet[] commands = new CommandSet[1]; //100 is the maximum number of points you can have
+	static CommandSet[] commands = new CommandSet[100]; //100 is the maximum number of points you can have
 	
 	static double initialAngle;
 	
@@ -187,6 +187,7 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 				
 					//Checks if mouseLocation "hits" (intersects) the line
 					if (g2.hit(mouseLocation, line, false)) {
+						
 						lineIndex = indexDraw - 1;
 						//Checks which tool is selected and colors accordingly
 						switch (tool) {
@@ -594,7 +595,8 @@ public class BuildAnAuton extends JFrame implements MouseListener, KeyListener{
 		for(JButton b: tools) {
 			b.setFocusPainted(false);
 			b.setFocusable(false);
-			commands[0] = new CommandSet();
+			for (int i = 0; i<99; i++)
+				commands[i] = new CommandSet();
 			//Sets the Border
 			JPanel top = new JPanel();
 			top.setLayout(new BorderLayout());
